@@ -1,0 +1,69 @@
+---
+title: "RNA-seq normalisation"
+output: html_notebook
+---
+
+```{r setup, message=FALSE}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+```
+
+```{r ggplot-setup, echo=FALSE}
+theme_set(theme_minimal())
+
+nogrid = function ()
+    theme(panel.grid.minor = element_blank(),
+          panel.grid.major.x = element_blank())
+
+pie_chart = function ()
+    list(coord_polar(theta = 'y', direction = -1),
+         theme(axis.text = element_blank(),
+               panel.grid = element_blank()))
+```
+
+```{r rna-seq-counts}
+counts = tibble(Gene = c('A', 'B', 'C', 'D'),
+                Length = c(1, 1, 2, 2),
+                Control = c(40, 20, 30, 40),
+                Treatment = c(20, 20, 30, 40)) %>%
+    gather(Library, Count, -Gene, -Length)
+
+gene_colors = c(A = 'dodgerblue2', B = 'darkgrey', C = 'darkgrey', D = 'darkgrey')
+```
+
+```{r rna-seq-barchart, fig.width=6, fig.height=3}
+ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
+    geom_bar(stat = 'identity') +
+    facet_wrap(~ Library) +
+    scale_fill_manual(values = gene_colors, guide = FALSE) +
+    labs(y = 'RNA molecules') +
+    nogrid()
+```
+
+```{r rna-seq-piechart, fig.width=6, fig.height=3}
+# FIXME: Direction should be clockwise but `direction = 1` does anticlockwise
+# on my computer. But labels are clockwise?!
+counts %>%
+    group_by(Library) %>%
+    mutate(Fraction = Count / sum(Count)) %>%
+    mutate(LabelPos = sum(Fraction) - (cumsum(Fraction) - Fraction / 2)) %>%
+    ggplot(aes(x = '', y = Fraction, fill = Gene)) +
+    geom_bar(stat = 'identity', width = 1, color = 'white') +
+    geom_text(aes(y = LabelPos, label = Gene)) +
+    pie_chart() +
+    facet_wrap(~ Library) +
+    scale_fill_manual(values = gene_colors, guide = FALSE) +
+    labs(x = '', y = 'Fraction of RNA molecules')
+```
+
+TPMs are for a transcript \(i\) calculated thusly:
+
+\[
+\text{TPM}_\color{red}i =
+    {\color{dodgerblue}{\frac{x_\color{red}i}{{l_\text{eff}}_\color{red}i}}}
+    \cdot
+    \frac{1}{\sum_\color{tomato}j \color{dodgerblue}{\frac{x_\color{tomato}j}{{l_\text{eff}}_\color{tomato}j}}}
+    \cdot
+    \color{darkcyan}{10^6}
+\]
