@@ -68,7 +68,12 @@ counts %>%
     labs(x = '', y = 'Fraction of RNA molecules')
 ```
 
-TPMs are for a transcript \(i\) calculated thusly:
+---
+
+> **TPM** (transcripts per millions):
+> Given a million RNA fragments, how many fragments of a given transcript do we see?
+
+TPMs for a transcript \(i\) are calculated thusly:
 
 \[
 \text{TPM}_\color{red}i =
