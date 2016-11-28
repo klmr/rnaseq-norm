@@ -3,6 +3,12 @@ title: "RNA-seq normalisation"
 output: html_notebook
 ---
 
+```{r knitr-setup, echo=FALSE}
+knitr::opts_chunk$set(fig.path = 'figures/',
+                      dev = c('png', 'pdf'),
+                      dpi = 100)
+```
+
 ```{r setup, message=FALSE}
 library(dplyr)
 library(tidyr)
