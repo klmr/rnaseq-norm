@@ -7,6 +7,7 @@ output:
         theme: league
         transition: none
         css: presentation.css
+        incremental: true
     html_notebook: default
     html_document: default
 ---
@@ -78,6 +79,15 @@ ggplot(counts, aes(x = Library, y = Count, fill = Gene)) +
     theme(legend.position = 'none')
 ```
 
+## Sources of variability
+
+* Across libaries
+    * Amount of RNA sequenced
+    * Technical noise
+* Across transcripts
+    * … longer transcripts = more fragments
+* <span class="em">Biologically meaningful</em>
+
 ## RNA-seq gene expression as fractions
 
 ```{r rna-seq-piechart, fig.width=6, fig.height=3}
@@ -101,7 +111,7 @@ counts %>%
 > **TPM** (transcripts per millions):
 > Given a million RNA fragments, how many fragments of a given transcript do we see?
 
-TPMs for a transcript \(i\) are calculated thusly:
+---
 
 \[
 \text{TPM}_\color{red}i =
