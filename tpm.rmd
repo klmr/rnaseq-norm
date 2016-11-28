@@ -43,6 +43,8 @@ counts
 gene_colors = c(A = 'dodgerblue2', B = 'darkgrey', C = 'darkgrey', D = 'darkgrey')
 ```
 
+## RNA-seq gene expression by counts
+
 ```{r rna-seq-barchart, fig.width=6, fig.height=3}
 ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
     geom_bar(stat = 'identity') +
@@ -51,6 +53,8 @@ ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
     labs(y = 'RNA molecules') +
     nogrid()
 ```
+
+## RNA-seq gene expression as fractions
 
 ```{r rna-seq-piechart, fig.width=6, fig.height=3}
 # FIXME: Direction should be clockwise but `direction = 1` does anticlockwise
