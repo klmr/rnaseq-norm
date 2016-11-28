@@ -1,0 +1,10 @@
+.reveal h1:after {
+    background: url(gfx/nuts.png) no-repeat;
+    content: '';
+    display: block;
+    height: 343px;
+    left: 350px;
+    position: absolute;
+    top: 150px;
+    width: 616px;
+}
