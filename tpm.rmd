@@ -5,6 +5,8 @@ output: html_notebook
 
 ```{r knitr-setup, echo=FALSE}
 knitr::opts_chunk$set(fig.path = 'figures/',
+                      fig.width = 3,
+                      fig.height = 3,
                       dev = c('png', 'pdf'),
                       dpi = 100)
 ```
