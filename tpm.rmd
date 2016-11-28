@@ -2,10 +2,13 @@
 title: "RNA-seq expression normalisation"
 author: Konrad Rudolph (<a href="https://twitter.com/klmr">@klmr</a>)
 output:
-  html_notebook: default
-  html_document: default
-  revealjs::revealjs_presentation:
-    theme: league
+    revealjs::revealjs_presentation:
+        center: true
+        theme: league
+        transition: none
+        css: presentation.css
+    html_notebook: default
+    html_document: default
 ---
 
 ```{r knitr-setup, echo=FALSE}
