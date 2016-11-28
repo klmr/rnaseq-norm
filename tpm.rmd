@@ -89,3 +89,31 @@ TPMs for a transcript \(i\) are calculated thusly:
 \]
 
 Where \(\color{red}i\) is the index of a transcript, and \(\color{tomato}j\) iterates over all (known) transcripts. \(\color{dodgerblue}{\frac{x_k}{{l_\text{eff}}_k}}\) is the *rate of fragment coverage per nucleobase*. Finally, \(\color{darkcyan}{10^6}\) is a scaling factor (= “per millions”).
+
+# Calculating TPMs
+
+```{r tpm}
+tpm = function (counts, effective_lengths) {
+    rate = log(counts) - log(effective_lengths)
+    exp(rate - log(sum(exp(rate))) + log(10 ^ 6))
+}
+```
+
+```{r tpms}
+tpms = counts %>%
+    group_by(Library) %>%
+    mutate(TPM = tpm(Count, EffectiveLength))
+
+tpms
+```
+
+## RNA-seq gene expression as TPM
+
+```{r rna-seq-tpm-barchart, fig.width=6, fig.height=3}
+ggplot(tpms, aes(x = Gene, y = TPM, fill = Gene)) +
+    geom_bar(stat = 'identity') +
+    facet_wrap(~ Library) +
+    scale_fill_manual(values = gene_colors, guide = FALSE) +
+    labs(y = 'TPM') +
+    nogrid()
+```
