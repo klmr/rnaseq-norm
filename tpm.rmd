@@ -54,6 +54,17 @@ ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
     nogrid()
 ```
 
+## Library size effect
+
+```{r library-size-barchart}
+ggplot(counts, aes(x = Library, y = Count, fill = Gene)) +
+    geom_bar(stat = 'sum') +
+    scale_fill_manual(values = gene_colors) +
+    labs(y = 'Raw counts') +
+    nogrid() +
+    theme(legend.position = 'none')
+```
+
 ## RNA-seq gene expression as fractions
 
 ```{r rna-seq-piechart, fig.width=6, fig.height=3}
