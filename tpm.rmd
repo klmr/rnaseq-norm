@@ -50,7 +50,7 @@ ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
     geom_bar(stat = 'identity') +
     facet_wrap(~ Library) +
     scale_fill_manual(values = gene_colors, guide = FALSE) +
-    labs(y = 'RNA molecules') +
+    labs(y = 'RNA molecules (?)') +
     nogrid()
 ```
 
