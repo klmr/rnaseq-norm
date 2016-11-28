@@ -23,11 +23,16 @@ pie_chart = function ()
 ```
 
 ```{r rna-seq-counts}
+mean_fragment_length = 300
+
 counts = tibble(Gene = c('A', 'B', 'C', 'D'),
-                Length = c(1, 1, 2, 2),
+                Length = c(700, 700, 800, 800),
                 Control = c(40, 20, 30, 40),
-                Treatment = c(20, 20, 30, 40)) %>%
-    gather(Library, Count, -Gene, -Length)
+                Treatment = c(20, 20, 30, 40) * 2) %>%
+    gather(Library, Count, -Gene, -Length) %>%
+    mutate(EffectiveLength = Length - mean_fragment_length + 1)
+
+counts
 
 gene_colors = c(A = 'dodgerblue2', B = 'darkgrey', C = 'darkgrey', D = 'darkgrey')
 ```
