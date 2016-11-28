@@ -1,6 +1,10 @@
 ---
 title: "RNA-seq normalisation"
-output: html_notebook
+output:
+  html_notebook: default
+  html_document: default
+  revealjs::revealjs_presentation:
+    theme: league
 ---
 
 ```{r knitr-setup, echo=FALSE}
