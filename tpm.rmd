@@ -3,9 +3,9 @@ title: "RNA-seq expression normalisation"
 author: "Konrad Rudolph (<a href='https://twitter.com/klmr'>@klmr</a>)"
 output:
     revealjs::revealjs_presentation:
-        center: true
+        center: yes
         css: presentation.css
-        incremental: true
+        incremental: yes
         theme: league
         transition: none
     html_notebook: default
