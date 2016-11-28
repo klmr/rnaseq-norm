@@ -1,5 +1,6 @@
 ---
-title: "RNA-seq normalisation"
+title: "RNA-seq expression normalisation"
+author: Konrad Rudolph (<a href="https://twitter.com/klmr">@klmr</a>)
 output:
   html_notebook: default
   html_document: default
