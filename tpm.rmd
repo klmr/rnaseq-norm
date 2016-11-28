@@ -83,3 +83,5 @@ TPMs for a transcript \(i\) are calculated thusly:
     \cdot
     \color{darkcyan}{10^6}
 \]
+
+Where \(\color{red}i\) is the index of a transcript, and \(\color{tomato}j\) iterates over all (known) transcripts. \(\color{dodgerblue}{\frac{x_k}{{l_\text{eff}}_k}}\) is the *rate of fragment coverage per nucleobase*. Finally, \(\color{darkcyan}{10^6}\) is a scaling factor (= “per millions”).
