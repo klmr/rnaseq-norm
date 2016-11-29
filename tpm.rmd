@@ -120,7 +120,7 @@ counts %>%
     labs(x = '', y = 'Fraction of RNA molecules')
 ```
 
-## Transcript lengths
+## Transcript length
 
 ```{r transcript-length, fig.width=6, fig.height=2.5}
 tlen = 22
@@ -157,6 +157,37 @@ l_\text{eff} = l - \bar{n} + 1
 \]
 
 ---
+
+Different transcript lengths lead to different expected fragment counts
+
+```{r simulate-fragments}
+transcripts = IRanges::IRanges(start = c(1, 22), width = c(20, 40))
+
+fstarts = IRanges::resize(transcripts, IRanges::width(transcripts) - flen + 1) %>%
+    IRanges::coverage() %>%
+    {seq_along(.)[as.integer(.) == 1]}
+
+set.seed(1234)
+fragments = IRanges::IRanges(start = sample(fstarts, 9), width = flen)
+fragment_data = fragments %>%
+    as.data.frame() %>%
+    mutate(bin = IRanges::disjointBins(fragments), type = 'read')
+```
+
+```{r transcript-length-differences, fig.width=8, fig.height=2}
+transcripts %>%
+    as.data.frame() %>%
+    mutate(bin = 0, type = c('a', 'b')) %>%
+    bind_rows(fragment_data) %>%
+    mutate(ymin = bin * (1 + gap), ymax = ymin + 1) %>%
+    ggplot(aes(xmin = start, ymin = ymin, xmax = end, ymax = ymax, fill = type)) +
+    geom_rect() +
+    scale_fill_manual(values = c(a = 'darkolivegreen4', b = 'dodgerblue3', read = 'darkgrey')) +
+    theme(panel.grid = element_blank(),
+          legend.position = 'none',
+          axis.title = element_blank(),
+          axis.text = element_blank())
+```
 
 > **TPM** (transcripts per millions):
 > Given a million RNA fragments, how many fragments of a given transcript do we see?
