@@ -69,6 +69,14 @@ ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
     nogrid()
 ```
 
+---
+
+But: we don’t want  
+<span class="em">**fragments per library**</span>.
+
+We want  
+<span class="em">**RNA molecules per cell**</span>.
+
 ## Library size effect
 
 ```{r library-size-barchart}
