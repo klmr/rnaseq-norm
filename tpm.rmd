@@ -137,8 +137,6 @@ counts %>%
 * \(\color{dodgerblue}{\frac{x_k}{{l_\text{eff}}_k}}\): rate of fragment coverage per nucleobase,
 * \(\color{darkcyan}{10^6}\): scaling factor (= “per millions”).
 
-## Calculating TPMs
-
 ```{r tpm}
 tpm = function (counts, effective_lengths) {
     rate = log(counts) - log(effective_lengths)
@@ -154,7 +152,7 @@ tpms = counts %>%
 tpms
 ```
 
-## RNA-seq gene expression as TPM
+## RNA-seq gene expression in TPM
 
 ```{r rna-seq-tpm-barchart, fig.width=6, fig.height=3}
 ggplot(tpms, aes(x = Gene, y = TPM, fill = Gene)) +
