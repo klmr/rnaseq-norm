@@ -243,3 +243,15 @@ ggplot(tpms, aes(x = Gene, y = TPM, fill = Gene)) +
     labs(y = 'TPM') +
     nogrid()
 ```
+
+---
+
+* Differentially expressed transcripts are clearly different
+* Identical transcripts are very similar
+* <span class="em">But not entirely the same</span>
+
+## Cross-library normalisation
+
+Fundamental assumption:
+
+> <span class="em">Most transcripts are **not** differentially expressed.</span>
