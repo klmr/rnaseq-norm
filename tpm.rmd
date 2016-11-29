@@ -13,14 +13,15 @@ output:
 ---
 
 ```{r knitr-setup, echo=FALSE}
+presentation_mode = identical(knitr::opts_knit$get('rmarkdown.pandoc.to'), 'revealjs')
+
 knitr::opts_chunk$set(fig.path = 'figures/',
                       fig.width = 3,
                       fig.height = 3,
                       dev = c('png', 'pdf'),
-                      dpi = 100)
-
-if (identical(knitr::opts_knit$get('rmarkdown.pandoc.to'), 'revealjs'))
-    knitr::opts_chunk$set(echo = FALSE)
+                      dpi = 100,
+                      echo = ! presentation_mode,
+                      results = if (presentation_mode) 'hide' else 'markup')
 ```
 
 ```{r setup, message=FALSE}
