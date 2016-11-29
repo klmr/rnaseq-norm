@@ -65,7 +65,7 @@ ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
     geom_bar(stat = 'identity') +
     facet_wrap(~ Library) +
     scale_fill_manual(values = gene_colors, guide = FALSE) +
-    labs(y = 'RNA molecules (?)') +
+    labs(y = 'Sequenced fragments') +
     nogrid()
 ```
 
@@ -75,7 +75,7 @@ ggplot(counts, aes(x = Gene, y = Count, fill = Gene)) +
 ggplot(counts, aes(x = Library, y = Count, fill = Gene)) +
     geom_bar(stat = 'sum') +
     scale_fill_manual(values = gene_colors) +
-    labs(y = 'Raw counts') +
+    labs(y = 'Sequenced fragments') +
     nogrid() +
     theme(legend.position = 'none')
 ```
