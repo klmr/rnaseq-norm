@@ -123,6 +123,7 @@ counts %>%
 ---
 
 \[
+\large
 \text{TPM}_\color{red}i =
     {\color{dodgerblue}{\frac{x_\color{red}i}{{l_\text{eff}}_\color{red}i}}}
     \cdot
