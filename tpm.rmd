@@ -2,14 +2,14 @@
 title: "RNA-seq expression normalisation"
 author: "Konrad Rudolph (<a href='https://twitter.com/klmr'>@klmr</a>)"
 output:
-    revealjs::revealjs_presentation:
-        center: yes
-        css: presentation.css
-        incremental: yes
-        theme: league
-        transition: none
-    html_notebook: default
-    html_document: default
+  revealjs::revealjs_presentation:
+    center: yes
+    css: presentation.css
+    incremental: yes
+    theme: league
+    transition: none
+  html_notebook: default
+  html_document: default
 ---
 
 ```{r knitr-setup, echo=FALSE}
