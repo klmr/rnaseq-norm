@@ -41,6 +41,11 @@ pie_chart = function ()
     list(coord_polar(theta = 'y', direction = -1),
          theme(axis.text = element_blank(),
                panel.grid = element_blank()))
+
+brackets = function (...) {
+    args = list(...)
+    grid:::recordGrob(do.call(pBrackets::grid.brackets, args), environment())
+}
 ```
 
 ```{r rna-seq-counts}
@@ -114,6 +119,42 @@ counts %>%
     scale_fill_manual(values = gene_colors, guide = FALSE) +
     labs(x = '', y = 'Fraction of RNA molecules')
 ```
+
+## Transcript lengths
+
+```{r transcript-length, fig.width=6, fig.height=2.5}
+tlen = 22
+flen = 10
+gap = 0.3
+transcript = tibble(xmin = 1, ymin = 1, xmax = tlen, ymax = 2, type = 'transcript')
+fragments = tibble(xmin = seq(1, tlen - flen), ymin = xmin * (1 + gap) + 1,
+                   xmax = xmin + flen, ymax = ymin + 1, type = 'fragment')
+
+annotate_equation = function (x, y, label)
+    annotate('text', x = x, y = y, label = label, parse = TRUE,
+             size = 8, family = 'Times New Roman')
+
+ggplot(bind_rows(transcript, fragments),
+       aes(xmin = xmin, ymin = ymin, xmax = xmax, ymax = ymax, fill = type)) +
+    geom_rect() +
+    coord_cartesian(xlim = c(-1.5, tlen), ylim = c(-3, tail(fragments$ymax, 1))) +
+    annotation_custom(brackets(0.135, 0.28, 0.135, 1, h = 0.1, lwd = 2)) +
+    annotate_equation(-1.5, 11, 'italic(l)[plain(eff)]') +
+    annotation_custom(brackets(0.145, 0.21, 0.95, 0.21, h = -0.1, lwd = 2)) +
+    annotate_equation(11.4, -2.9, 'italic(l)') +
+    annotation_custom(brackets(0.145, 0.34, 0.526, 0.34, h = 0.1, lwd = 2)) +
+    annotate_equation(6.15, 7.5, 'italic(bar(n))') +
+    scale_fill_manual(values = c(transcript = 'darkolivegreen4', fragment = 'darkgrey')) +
+    theme(panel.grid = element_blank(),
+          legend.position = 'none',
+          axis.title = element_blank(),
+          axis.text = element_blank())
+```
+
+\[
+\large
+l_\text{eff} = l - \bar{n} + 1
+\]
 
 ---
 
