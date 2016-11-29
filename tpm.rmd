@@ -124,17 +124,17 @@ counts %>%
 
 \[
 \large
-\text{TPM}_\color{red}i =
-    {\color{dodgerblue}{\frac{x_\color{red}i}{{l_\text{eff}}_\color{red}i}}}
+\text{TPM}_\color{orchid}i =
+    {\color{dodgerblue}{\frac{x_\color{orchid}i}{{l_\text{eff}}_\color{orchid}i}}}
     \cdot
     \frac{1}{\sum_\color{tomato}j \color{dodgerblue}{\frac{x_\color{tomato}j}{{l_\text{eff}}_\color{tomato}j}}}
     \cdot
     \color{darkcyan}{10^6}
 \]
 
-* \(\color{red}i\): index of a transcript,
+* \(\color{orchid}i\): index of a transcript,
 * \(\color{tomato}j\) iterates over all (known) transcripts,
-* \(\color{dodgerblue}{\frac{x_k}{{l_\text{eff}}_k}}\): *rate of fragment coverage per nucleobase*,
+* \(\color{dodgerblue}{\frac{x_k}{{l_\text{eff}}_k}}\): rate of fragment coverage per nucleobase,
 * \(\color{darkcyan}{10^6}\): scaling factor (= “per millions”).
 
 ## Calculating TPMs
