@@ -189,6 +189,15 @@ transcripts %>%
           axis.text = element_blank())
 ```
 
+## To review
+
+RNA-seq count is influenced by
+
+* Library size
+* Transcript length
+
+---
+
 > **TPM** (transcripts per millions):
 > Given a million RNA fragments, how many fragments of a given transcript do we see?
 
