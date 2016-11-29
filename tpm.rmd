@@ -160,7 +160,7 @@ l_\text{eff} = l - \bar{n} + 1
 
 Different transcript lengths lead to different expected fragment counts
 
-```{r simulate-fragments}
+```{r simulate-fragments, message=FALSE}
 transcripts = IRanges::IRanges(start = c(1, 22), width = c(20, 40))
 
 fstarts = IRanges::resize(transcripts, IRanges::width(transcripts) - flen + 1) %>%
