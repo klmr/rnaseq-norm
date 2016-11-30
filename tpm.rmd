@@ -263,19 +263,25 @@ Fundamental assumption:
 ---
 
 ```{r size-factors, fig.width=6, fig.height=3}
-size_factors_ = function (counts, genes, group) {
+size_factors_ = function (counts, genes, experiment) {
     counts %>%
         group_by_(genes) %>%
         mutate(LogGeomMean = mean(log(Count))) %>%
-        group_by_(group) %>%
+        group_by_(experiment) %>%
         mutate(SF = exp(median(log(Count) - LogGeomMean)))
 }
 
-norm_counts = counts %>% size_factors_('Gene', 'Library') %>%
+size_factors = function (counts, genes, experiment) {
+    size_factors_(counts, lazyeval::lazy(genes), lazyeval::lazy(experiment))
+}
+
+norm_counts = counts %>%
+    size_factors(Gene, Library) %>%
     mutate(Count = Count / SF)
 
 norm_counts
 
+# TPM plot again, for comparison
 tpm_plot %+% mutate(tpms, TPM = TPM / 10000) + ylab('') + ggtitle('TPM / 10000')
 
 ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
