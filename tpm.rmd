@@ -214,7 +214,8 @@ RNA-seq count is influenced by
     \color{darkcyan}{10^6}
 \]
 
-* \(\color{orchid}i\): index of a transcript,
+* \(\color{orchid}i\): transcript index,
+* \(x_i\): transcript raw count,
 * \(\color{tomato}j\) iterates over all (known) transcripts,
 * \(\color{dodgerblue}{\frac{x_k}{{l_\text{eff}}_k}}\): rate of fragment coverage per nucleobase,
 * \(\color{darkcyan}{10^6}\): scaling factor (= “per millions”).
