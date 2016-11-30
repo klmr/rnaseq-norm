@@ -93,15 +93,6 @@ ggplot(counts, aes(x = Library, y = Count, fill = Gene)) +
     theme(legend.position = 'none')
 ```
 
-## Sources of variability
-
-* Across libaries
-    * Amount of RNA sequenced
-    * Technical noise
-* Across transcripts
-    * … longer transcripts = more fragments
-* <span class="em">Biologically meaningful</em>
-
 ## RNA-seq gene expression as fractions
 
 ```{r rna-seq-piechart, fig.width=6, fig.height=3}
@@ -119,6 +110,15 @@ counts %>%
     scale_fill_manual(values = gene_colors, guide = FALSE) +
     labs(x = '', y = 'Fraction of RNA molecules')
 ```
+
+## Sources of variability
+
+* Across libaries
+    * Amount of RNA sequenced
+    * Technical noise
+* Across transcripts
+    * … longer transcripts = more fragments
+* <span class="em">Biologically meaningful</em>
 
 ## Transcript length
 
