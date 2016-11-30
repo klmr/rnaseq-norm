@@ -11,12 +11,12 @@ presentation: ${presentation}
 .PHONY: notebook
 notebook: ${notebook}
 
-render = Rscript -e "rmarkdown::render('$2', $1, '$3')"
+render = Rscript -e "rmarkdown::render('$2', '$1', '$3')"
 
 ${presentation}: ${source} ${presentation-files}
-	$(call render,revealjs::revealjs_presentation(),$<,$@)
+	$(call render,revealjs::revealjs_presentation,$<,$@)
 
 ${notebook}: ${source}
-	$(call render,rmarkdown::html_notebook(),$<,$@)
+	$(call render,html_notebook,$<,$@)
 
 .DELETE_ON_ERROR:
