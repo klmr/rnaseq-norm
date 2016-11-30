@@ -236,12 +236,14 @@ tpms
 ## RNA-seq gene expression in TPM
 
 ```{r rna-seq-tpm-barchart, fig.width=6, fig.height=3}
-ggplot(tpms, aes(x = Gene, y = TPM, fill = Gene)) +
+tpm_plot = ggplot(tpms, aes(x = Gene, y = TPM, fill = Gene)) +
     geom_bar(stat = 'identity') +
     facet_wrap(~ Library) +
     scale_fill_manual(values = gene_colors, guide = FALSE) +
     labs(y = 'TPM') +
     nogrid()
+
+tpm_plot
 ```
 
 ---
