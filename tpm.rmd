@@ -258,6 +258,33 @@ Fundamental assumption:
 
 > <span class="em">Most transcripts are **not** differentially expressed.</span>
 
+---
+
+```{r size-factors, fig.width=6, fig.height=3}
+size_factors_ = function (counts, genes, group) {
+    counts %>%
+        group_by_(genes) %>%
+        mutate(LogGeomMean = mean(log(Count))) %>%
+        group_by_(group) %>%
+        mutate(SF = exp(median(log(Count) - LogGeomMean)))
+}
+
+norm_counts = counts %>% size_factors_('Gene', 'Library') %>%
+    mutate(Count = Count / SF)
+
+norm_counts
+
+tpm_plot %+% mutate(tpms, TPM = TPM / 10000) + ylab('') + ggtitle('TPM / 10000')
+
+ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
+    geom_bar(stat = 'identity') +
+    facet_wrap(~ Library) +
+    scale_fill_manual(values = gene_colors, guide = FALSE) +
+    ylab('') +
+    ggtitle('Count / library size factor') +
+    nogrid()
+```
+
 ## Literature
 
 * [What the FPKM? A review of RNA-Seq expression units](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/)
