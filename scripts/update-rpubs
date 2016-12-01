@@ -1,0 +1,22 @@
+#!/usr/bin/env Rscript
+
+filename = commandArgs(trailingOnly = TRUE)[1]
+
+message('Uploading ', dQuote(filename), ' to RPubs')
+
+source_filename = sub('\\.nb\\.html$', '.rmd', filename)
+rsc_config = sprintf('rsconnect/documents/%s/rpubs.com/rpubs/Document.dcf',
+                     source_filename)
+rsc_record = read.dcf(rsc_config)
+
+title = rsc_record[1, 'title']
+if (nchar(title) == 0L)
+    title = 'Title'
+
+result = rsconnect::rpubsUpload(title, filename, source_filename,
+                                id = rsc_record[1, 'bundleId'])
+
+if (! is.null(result$error))
+    stop(result$error)
+
+# vim: ft=r
