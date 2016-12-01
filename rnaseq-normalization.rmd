@@ -311,7 +311,7 @@ ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
 * CPM = RPM = {counts/reads} per million
 
     \[
-    CPM_i = x_i \cdot \frac{1}{\sum_j x_j} \cdot 10^6
+    \text{CPM}_i = x_i \cdot \frac{1}{\sum_j x_j} \cdot 10^6
     \]
 
     👎 Does not account for differences in transcript length
@@ -319,7 +319,7 @@ ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
 * RPKM = FPKM = {reads/fragments} per kilobase per million
 
     \[
-    FPKM_i = \frac{x_i}{{l_\text{eff}}_i} \cdot \frac{1}{\sum_j x_j} \cdot 10^6 \cdot 10^3
+    \text{FPKM}_i = \frac{x_i}{{l_\text{eff}}_i} \cdot \frac{1}{\sum_j x_j} \cdot 10^6 \cdot 10^3
     \]
 
     👎 Has different scaling factors for each RNA-seq library
