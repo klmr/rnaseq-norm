@@ -8,9 +8,9 @@ filename = commandArgs(trailingOnly = TRUE)[1]
 message('Uploading ', dQuote(filename), ' to RPubs')
 
 source_filename = sub('\\.nb\\.html$', '.rmd', filename)
-rsc_config = sprintf('rsconnect/documents/%s/rpubs.com/rpubs/Document.dcf',
-                     source_filename)
-rsc_record = read.dcf(rsc_config)
+rsc_config_filename = sprintf('rsconnect/documents/%s/rpubs.com/rpubs/Document.dcf',
+                              source_filename)
+rsc_record = read.dcf(rsc_config_filename)
 
 if (nchar(rsc_record[1, 'title']) == 0L)
     rsc_record[1, 'title'] = get_rmd_title(source_filename)
