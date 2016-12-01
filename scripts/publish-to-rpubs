@@ -1,5 +1,8 @@
 #!/usr/bin/env Rscript
 
+get_rmd_title = function (rmd_file)
+    rmarkdown::yaml_front_matter(rmd_file)$title
+
 filename = commandArgs(trailingOnly = TRUE)[1]
 
 message('Uploading ', dQuote(filename), ' to RPubs')
@@ -9,11 +12,11 @@ rsc_config = sprintf('rsconnect/documents/%s/rpubs.com/rpubs/Document.dcf',
                      source_filename)
 rsc_record = read.dcf(rsc_config)
 
-title = rsc_record[1, 'title']
-if (nchar(title) == 0L)
-    title = 'Title'
+if (nchar(rsc_record[1, 'title']) == 0L)
+    rsc_record[1, 'title'] = get_rmd_title(source_filename)
 
-result = rsconnect::rpubsUpload(title, filename, source_filename,
+result = rsconnect::rpubsUpload(rsc_record[1, 'title'],
+                                filename, source_filename,
                                 id = rsc_record[1, 'bundleId'])
 
 if (! is.null(result$error))
