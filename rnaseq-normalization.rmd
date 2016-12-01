@@ -302,6 +302,7 @@ ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
 * [What the FPKM? A review of RNA-Seq expression units](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/)
 * [*Wagner, GP & al.*, 2012](https://paperpile.com/app/p/6bf27a5c-d26b-003b-8b28-41c62dee5051)
 * [DESeq2 vignette](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+* [📜 Code for slides](https://github.com/klmr/rnaseq-norm)
 
 ## Supplementary material
 
