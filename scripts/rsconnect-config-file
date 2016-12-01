@@ -1,0 +1,7 @@
+#!/usr/bin/env Rscript
+filename = commandArgs(trailingOnly = TRUE)[1]
+source_filename = sub('\\.nb\\.html$', '.rmd', filename)
+rsc_config_filename = sprintf('rsconnect/documents/%s/rpubs.com/rpubs/Document.dcf',
+                              source_filename)
+cat(rsc_config_filename, '\n', sep = '')
+# vim: ft=r
