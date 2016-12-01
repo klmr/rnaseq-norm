@@ -2,6 +2,7 @@ source = rnaseq-normalization.rmd
 presentation = ${source:.rmd=.html}
 notebook = ${source:.rmd=.nb.html}
 presentation-files = presentation.css gfx/nuts.png
+rsconnect_config = $(shell ./scripts/rsconnect-config-file ${notebook})
 
 all: presentation notebook
 
@@ -10,6 +11,13 @@ presentation: ${presentation}
 
 .PHONY: notebook
 notebook: ${notebook}
+
+.PHONY: publish
+
+publish: ${rsconnect_config}
+
+${rsconnect_config}: ${notebook}
+	./scripts/publish-to-rpubs "$<"
 
 render = Rscript -e "library(methods); rmarkdown::render('$2', '$1', '$3')"
 
