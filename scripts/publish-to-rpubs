@@ -22,4 +22,9 @@ result = rsconnect::rpubsUpload(rsc_record[1, 'title'],
 if (! is.null(result$error))
     stop(result$error)
 
+rsc_record[1, 'when'] = as.numeric(as.POSIXct(Sys.time()))
+write.dcf(rsc_record, rsc_config_filename)
+
+message('🔗 ', result$continueUrl)
+
 # vim: ft=r
