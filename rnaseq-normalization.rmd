@@ -202,6 +202,8 @@ RNA-seq count is influenced by
 > **TPM** (transcripts per millions):
 > Given a million RNA fragments, how many fragments of a given transcript do we see?
 
+→ TPM is a relative *fraction*, not absolute expression
+
 ---
 
 \[
@@ -252,7 +254,9 @@ tpm_plot
 
 * Differentially expressed transcripts are clearly different
 * Identical transcripts are very similar
-* <span class="em">But not entirely the same</span>
+* But not entirely the same
+* 🎗 TPMs are relative fractions of library
+* → Comparison across libraries requires additional effort
 
 ## Cross-library normalisation
 
@@ -289,7 +293,7 @@ ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
     facet_wrap(~ Library) +
     scale_fill_manual(values = gene_colors, guide = FALSE) +
     ylab('') +
-    ggtitle('Count / size factor') +
+    ggtitle('Count / DESeq size factors') +
     nogrid()
 ```
 
@@ -298,3 +302,24 @@ ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
 * [What the FPKM? A review of RNA-Seq expression units](https://haroldpimentel.wordpress.com/2014/05/08/what-the-fpkm-a-review-rna-seq-expression-units/)
 * [*Wagner, GP & al.*, 2012](https://paperpile.com/app/p/6bf27a5c-d26b-003b-8b28-41c62dee5051)
 * [DESeq2 vignette](https://bioconductor.org/packages/devel/bioc/vignettes/DESeq2/inst/doc/DESeq2.html)
+* [📜 Code for slides](https://github.com/klmr/rnaseq-norm)
+
+## Supplementary material
+
+### Legacy normalisation methods
+
+* CPM = RPM = {counts/reads} per million
+
+    \[
+    CPM_i = x_i \cdot \frac{1}{\sum_j x_j} \cdot 10^6
+    \]
+
+    👎 Does not account for differences in transcript length
+
+* RPKM = FPKM = {reads/fragments} per kilobase per million
+
+    \[
+    FPKM_i = \frac{x_i}{{l_\text{eff}}_i} \cdot \frac{1}{\sum_j x_j} \cdot 10^6 \cdot 10^3
+    \]
+
+    👎 Has different scaling factors for each RNA-seq library

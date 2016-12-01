@@ -11,7 +11,7 @@ presentation: ${presentation}
 .PHONY: notebook
 notebook: ${notebook}
 
-render = Rscript -e "rmarkdown::render('$2', '$1', '$3')"
+render = Rscript -e "library(methods); rmarkdown::render('$2', '$1', '$3')"
 
 ${presentation}: ${source} ${presentation-files}
 	$(call render,revealjs::revealjs_presentation,$<,$@)
