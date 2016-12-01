@@ -202,6 +202,8 @@ RNA-seq count is influenced by
 > **TPM** (transcripts per millions):
 > Given a million RNA fragments, how many fragments of a given transcript do we see?
 
+→ TPM is a relative *fraction*, not absolute expression
+
 ---
 
 \[
@@ -252,7 +254,9 @@ tpm_plot
 
 * Differentially expressed transcripts are clearly different
 * Identical transcripts are very similar
-* <span class="em">But not entirely the same</span>
+* But not entirely the same
+* 🎗 TPMs are relative fractions of library
+* → Comparison across libraries requires additional effort
 
 ## Cross-library normalisation
 
