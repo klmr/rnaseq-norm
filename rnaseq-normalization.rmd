@@ -293,7 +293,7 @@ ggplot(norm_counts, aes(Gene, Count, fill = Gene)) +
     facet_wrap(~ Library) +
     scale_fill_manual(values = gene_colors, guide = FALSE) +
     ylab('') +
-    ggtitle('Count / size factor') +
+    ggtitle('Count / DESeq size factors') +
     nogrid()
 ```
 
